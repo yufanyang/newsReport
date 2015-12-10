@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.INewsDao">
+    <select id="getNews" resultType="News" parameterType="News">
+         SELECT * FROM news a,colums b,`comment` c WHERE a.colums_id=b.colums_id AND a.comment_code=c.comment_code
+    </select>
+    <delete id="delete" parameterType="News">
+        DELETE  FROM news WHERE news_id=#{News.news_id}
+    </delete>
+    <delete id="delete" parameterType="Comment">
+        DELETE FROM comment WHERE comment_id=#{comment_id}
+    </delete>
+    <insert id="insert" parameterType="News">
+        INSERT INTO news VALUES (#{news_id},#{news_title},#{news_content},#{news_author},#{news_date},#{colums_id})
+    </insert>
+    <update id="update" parameterType="News">
+        UPDATE news
+        <set>
+            <if test="news_title!=null">news_title=#{news_title},</if>
+            <if test="news_content!=null">news_content=#{news_content},</if>
+            <if test="news_author!=null">news_author=#{news_author},</if>
+            <if test="news_date!=null">news_date=#{news_date},</if>
+            <if test="colums_id!=null">colums_id=#{colums_id}</if>
+        </set>
+        <where>
+            WHERE news_id=#{news_id}
+        </where>
+    </update>
+
+</mapper>
