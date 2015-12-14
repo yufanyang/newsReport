@@ -41,6 +41,9 @@
                     location.href="";
                 }
             });
+            $("#addNews").bind("click", function (){
+                location.href="addNews.jsp";
+            })
         })
     </script>
 </head>
@@ -50,7 +53,7 @@
         <a href=""><input type='button' value='登录' style="color: navy" align='right'/></a>
         <a href=""><input type='button' value='注销' style="color: navy" align='right'/></a>
     </div>
-<input type="button" value="新增" onclick="addNews()">
+<input type="button" value="新增" id="addNews">
 <table border='1' cellspacing='0' align='center' width='50%'>
     <tr align="center">
         <th>新闻编号</th>
@@ -68,8 +71,17 @@
         <td>${news.news_content}</td>
         <td>${news.news_date}</td>
         <td>${news.news_author}</td>
-        <td></td>
-        <td><input type="button" value="删除"><input type="button" value="修改"></td>
+        <td>${news.colums_id}
+            <c:if test="${news.colums_id=201}">娱乐</c:if>
+            <c:if test="${news.colums_id=202}">体育</c:if>
+            <c:if test="${news.colums_id=203}">财经</c:if>
+            <c:if test="${news.colums_id=204}">政治</c:if>
+            <c:if test="${news.colums_id=205}">搞笑</c:if>
+        </td>
+        <td>
+            <a href="/news/delete?id=${news.news_id}"><input type="button" value="删除" id="deleteNews"></a>
+            <a href="updateNews.jsp?id=${news.news_id}&tilde=${news.news_title}&context=${news.news_content}&date=${news.news_date}&author=${news.news_author}&colums=${news.colums_id}"><input type="button" value="修改" id="updateNews"></a>
+        </td>
     </tr>
 </c:forEach>
     <div align="center">
@@ -77,8 +89,8 @@
         <input type="button" value="上一页" id="pageup">
         <input type="button" value="下一页" id="pagedn">
         <input type="button" value="末页" id="last">
-       <%-- 共<span id="count">${count}</span>页
-        <input type="hidden" value="${page}" id="page">--%>
+        共<span id="count"></span>页
+        <input type="hidden" value="" id="page">
     </div>
 </table>
 </body>

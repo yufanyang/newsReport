@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--配置扫描dao组件-->
+    <context:component-scan base-package="com.dao"/>
+    <!--配置扫描service组件-->
+    <context:component-scan base-package="com.service"/>
 
     <!-- 引入config.properties -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -13,7 +18,6 @@
         </property>
     </bean>
 
-
     <!--数据源mysql-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
@@ -22,29 +26,27 @@
         <property name="password" value="${password}"></property>
         <property name="defaultAutoCommit" value="true"></property>
     </bean>
-    <!-- 配置sqlSessionFactory -->
+    <!-- 配置SessionFactory,将spring和mabatis整合 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
-        <property name="typeAliasesPackage" value="model"></property>
-        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
-    </bean>
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"> </property>
-        <property name="suffix" value=".jsp"></property>
+        <property name="typeAliasesPackage" value="mapper"></property>
+        <property name="configLocation" value="classpath:config.xml"></property>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"><!--加载mapper文件--></property>
     </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.controller"/>
+    <!--事务处理-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.dao"/>
-    </bean>
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.service"/>
-    </bean>
-
-    <!--<context:component-scan base-package="com.controller.*.controller" />
-    <context:component-scan base-package="com.service.*.service" />
-    <context:component-scan base-package="com.dao.*.dao" />-->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="find" read-only="true" />
+            <tx:method name="get" read-only="true" />
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
 
 </beans>

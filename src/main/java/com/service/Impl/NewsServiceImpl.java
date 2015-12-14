@@ -3,18 +3,18 @@ package com.service.Impl;
 import com.dao.INewsDao;
 import com.model.News;
 import com.service.INewsService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by yufanyang on 12/9/2015.
  */
+@Service("newsService")
 public class NewsServiceImpl implements INewsService {
     private INewsDao newsDao;
 
     public List<News> getNews() {
-       /* List<News> newsList=new ArrayList<News>();
-        newsList.add(new News());*/
         return newsDao.getNews();
     }
 
