@@ -17,6 +17,15 @@ public class User {
     public User() {
     }
 
+    public User(int uses_id, List list, int uses_status, int uses_cell, String uses_password, String uses_name) {
+        this.uses_id = uses_id;
+        this.list = list;
+        this.uses_status = uses_status;
+        this.uses_cell = uses_cell;
+        this.uses_password = uses_password;
+        this.uses_name = uses_name;
+    }
+
     //get和set方法
 
     public int getUses_id() {

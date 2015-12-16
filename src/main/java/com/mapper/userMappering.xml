@@ -6,7 +6,7 @@
         select * from users
         <where>
             <if test="account != null">
-                and uses_id=#{account}
+                    uses_id=#{account}
             </if>
             <if test="password != null">
                 and uses_password=#{password}
