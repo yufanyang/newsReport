@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.INewsDao">
+ <!--   <resultMap id="BaseResultMap" type="com.model.News">
+        <id column="news_id" property="news_id" jdbcType="int" />
+        <result column="news_title" property="news_title" jdbcType="varchar" />
+        <result column="news_content" property="news_content" jdbcType="varchar" />
+        <result column="news_author" property="news_author" jdbcType="varchar" />
+        <result column="news_date" property="news_date" jdbcType="varchar" />
+        <result column="colums_id" property="colums_id" jdbcType="int" />
+        <result column="comment_code" property="comment_code" jdbcType="int" />
+    </resultMap>-->
+    <sql id="Base_Column_List">
+        news_id,news_title,news_content,news_author,news_date,colums_id,comment_code
+    </sql>
+    <select id="selectNewsById" parameterType="News">
+        select
+        <include refid="Base_Column_List" />
+        from news
+        where news_id = #{news_id}
+    </select>
+    <select id="getNews" resultType="News" parameterType="News">
+        /* SELECT * FROM news a,colums b,`comment` c WHERE a.colums_id=b.colums_id AND a.comment_code=c.comment_code*/
+            SELECT * FROM news
+    </select>
+    <delete id="deleteNews" parameterType="News">
+        DELETE  FROM news WHERE news_id=#{news_id}
+    </delete>
+    <delete id="deleteComment" parameterType="Comment">
+        DELETE FROM comment WHERE comment_id=#{comment_id}
+    </delete>
+    <insert id="addNews" parameterType="News">
+        INSERT INTO news(news_id,news_title,news_content,news_author,news_date,colums_id) VALUES (#{news_id},#{news_title},#{news_content},#{news_author},#{news_date},#{colums_id})
+    </insert>
+    <update id="updateNews" parameterType="News">
+        UPDATE news
+        <set>
+            <if test="news_title!=null">news_title=#{news_title},</if>
+            <if test="news_content!=null">news_content=#{news_content},</if>
+            <if test="news_author!=null">news_author=#{news_author},</if>
+            <if test="news_date!=null">news_date=#{news_date},</if>
+            <if test="colums_id!=null">colums_id=#{colums_id}</if>
+        </set>
+        <where>
+            WHERE news_id=#{news_id}
+        </where>
+    </update>
+
+</mapper>

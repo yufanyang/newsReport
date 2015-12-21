@@ -18,17 +18,6 @@ public class News {
     public News() {
     }
 
-    public News(int news_id, List list, int comment_code, int colums_id, String news_date, String news_author, String news_content, String news_title) {
-        this.news_id = news_id;
-        this.list = list;
-        this.comment_code = comment_code;
-        this.colums_id = colums_id;
-        this.news_date = news_date;
-        this.news_author = news_author;
-        this.news_content = news_content;
-        this.news_title = news_title;
-    }
-
     //get和set方法
     public int getNews_id() {
         return news_id;

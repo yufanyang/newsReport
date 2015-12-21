@@ -28,8 +28,9 @@ public class UserController {
         }
     }
     @RequestMapping("/check")
-    public @ResponseBody String login(String username){
-        return "username is avlid ";
+    public @ResponseBody String login(String account){
+
+        return "account is valid";
     }
 
     public IUserService getUserService() {

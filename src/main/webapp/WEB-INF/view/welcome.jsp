@@ -12,48 +12,20 @@
     <title>主页面</title>
     <script type="text/javascript" src="script/jquery-1.8.1.min.js"></script>
     <script type="application/javascript">
-        $(function(){
-           /* $("#first").bind("click",function(){
-                if($("#page").value()==1){
-                    alert("已经是第一页了");
-                }else {
-                    location.href="";
-                }
-            });
-            $("last").bind("click",function(){
-                if($("#page").val()==$("#count").html()){
-                    alert("已经是最后一页了");
-                }else{
-                    location.href="";
-                }
-            });
-            $("pageup").bind("click",function(){
-                if($("#page").val()==1){
-                    alert("已经是第一页了");
-                }else{
-                    location.href="";
-                }
-            });
-            $("#pgdn").bind("click",function(){
-                if($("#page").val()==$("#count").html()){
-                    alert("已经是最后一页了");
-                }else{
-                    location.href="";
-                }
-            });*/
-            $("#addNews").bind("click", function (){
-                location.href="addNews.jsp";
-            })
-            $("#deleteNews").bind("click",function(){
+            function deleteNews(){
                 var mess=confirm("确定删除？");
-                if (mess){
-                    location.href="/news/delete?id=${news.news_id}";
+                if(mess){
+                    location.href="/news/delete?id=${news.news_id}"
                     alert("删除成功！");
-                }else{
+                }else {
                     alert("取消删除");
                 }
-            })
-        })
+            }
+            function addNews() {
+                location.href = "addNews.jsp";
+            }
+
+
     </script>
 </head>
 <body>
@@ -89,8 +61,8 @@
         </td>
         <td>
             <%--<a href="/news/delete?id=${news.news_id}">--%>
-            <input type="button" value="删除" id="deleteNews">
-            <a href="updateNews.jsp?id=${news.news_id}&tilde=${news.news_title}&context=${news.news_content}&date=${news.news_date}&author=${news.news_author}&colums=${news.colums_id}"><input type="button" value="修改" id="updateNews"></a>
+            <input type="button" value="删除" onclick="deleteNews()">
+            <a href="updateNews.jsp?id=${news.news_id}&tilde=${news.news_title}&context=${news.news_content}&date=${news.news_date}&author=${news.news_author}&colums=${news.colums_id}"><input type="button" value="修改" onclick="updateNews()"></a>
         </td>
     </tr>
 </c:forEach>

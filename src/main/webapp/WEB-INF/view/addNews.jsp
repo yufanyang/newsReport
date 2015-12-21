@@ -72,7 +72,9 @@
     </script>
 </head>
 <body>
-<div align="center">
+
+<div align="left">
+    <font color="red">《新闻添加》</font>
     <form action="/news/add" method="post">
         news_id     :<input type="text" name="newsId" id="id"><span id="cid"></span><br>
         news_title  :<input type="text" name="newsTitle" id="title"><br>
@@ -80,18 +82,18 @@
         news_author :<input type="text" name="newsAuthor" id="author"><br>
         news_date   :<input type="text" name="newsDate" id="date"><br>
         colums      :<input type="text" name="colums" id="colume"><span id="ccolums"></span><br>
-    <input type="submit" id="submit">
+    <input type="submit" id="submit" value="提交">
     </form>
     <a href="welcome.jsp">返回</a>
 </div>
 <div align="left">
     Tips:
-    <font size="2" color="red">
-        201-->娱乐
-        202-->体育
-        203-->财经
-        204-->政治
-        205-->搞笑
+    <br size="2" color="red">
+        201-->娱乐</br>
+        202-->体育</br>
+        203-->财经</br>
+        204-->政治</br>
+        205-->搞笑</br>
     </font>
 </div>
 </body>

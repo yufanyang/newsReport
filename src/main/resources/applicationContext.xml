@@ -29,13 +29,14 @@
         <property name="dataSource" ref="dataSource"></property>
         <property name="typeAliasesPackage" value="com.model"></property>
         <property name="configLocation" value="classpath:config.xml"></property>
-        <property name="mapperLocations" value="classpath:com/mapper/*.xml"><!--加载mapper文件--></property>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"><!--加载mapper文件--></property>
     </bean>
-    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
-    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-    </bean>-->
+    </bean>
 
     <!--事务处理-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

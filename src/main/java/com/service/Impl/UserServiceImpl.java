@@ -1,6 +1,5 @@
 package com.service.Impl;
 
-import com.dao.IUserDao;
 import com.model.User;
 import com.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl implements IUserService {
-    private IUserDao userDao;
+   /* private IUserDao userDao;
 
     public IUserDao getUserDao() {
         return userDao;
@@ -21,10 +20,10 @@ public class UserServiceImpl implements IUserService {
 
     public void setUserDao(IUserDao userDao) {
         this.userDao = userDao;
-    }
+    }*/
 
     public List<User> getUsers() {
-        List<User> userList=new ArrayList<User>();
+        List<User> userList = new ArrayList<User>();
         userList.add(new User());
         return userList;
     }

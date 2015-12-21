@@ -6,6 +6,6 @@
     <!--定义别名-->
     <typeAliases>
         <typeAlias type="com.model.News" alias="News"></typeAlias>
-        <typeAlias type="com.model.User" alias="User"></typeAlias>
+        <!--<typeAlias type="com.model.User" alias="User"></typeAlias>-->
     </typeAliases>
 </configuration>
